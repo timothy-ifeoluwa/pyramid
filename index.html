@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Multi-step Form</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <div class="container">
+    <div class="sidebar">
+      <div class="step active">
+        <div class="circle">1</div>
+        <div class="text">
+          <span>STEP 1</span>
+          <strong>YOUR INFO</strong>
+        </div>
+      </div>
+      <div class="step">
+        <div class="circle">2</div>
+        <div class="text">
+          <span>STEP 2</span>
+          <strong>SELECT PLAN</strong>
+        </div>
+      </div>
+      <div class="step">
+        <div class="circle">3</div>
+        <div class="text">
+          <span>STEP 3</span>
+          <strong>ADD-ONS</strong>
+        </div>
+      </div>
+      <div class="step">
+        <div class="circle">4</div>
+        <div class="text">
+          <span>STEP 4</span>
+          <strong>SUMMARY</strong>
+        </div>
+      </div>
+      <div class="background-shape"></div>
+    </div>
+
+    <div class="form-section">
+      <h2>Personal info</h2>
+      <p>Please provide your name, email address, and phone number.</p>
+
+      <form id="infoForm">
+        <label for="name">Name</label>
+        <input type="text" id="name" placeholder=" Timothy Ifeoluwa " required>
+
+        <label for="email">Email Address</label>
+        <input type="text" id="email" placeholder=" timothyifeoluwa20@gmail.com " required>
+
+        <label for="phone">Phone Number</label>
+        <input type="text" id="phone" placeholder=" +2347035703798" required>
+
+        <div class="btn-right">
+          <button type="submit">Next Step</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+
+</html>
