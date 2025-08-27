@@ -1,168 +1,183 @@
-
 const state = {
   step: 0,
-  billing: 'monthly',      
-  plan: null,              
-  addons: []               
+  billing: "monthly",
+  plan: null,
+  addons: [],
 };
 
+const steps = [...document.querySelectorAll(".step")];
+const badges = [...document.querySelectorAll(".step-badge")];
 
-const steps      = [...document.querySelectorAll('.step')];
-const badges     = [...document.querySelectorAll('.step-badge')];
+const planCards = [...document.querySelectorAll(".plan-card")];
+const billSwitch = document.getElementById("billSwitch");
 
-const planCards  = [...document.querySelectorAll('.plan-card')];
-const billSwitch = document.getElementById('billSwitch');
+const addonChecks = [...document.querySelectorAll(".addon-check")];
 
-const addonChecks = [...document.querySelectorAll('.addon-check')];
+const sumPlanEl = document.getElementById("sumPlan");
+const sumPlanPriceEl = document.getElementById("sumPlanPrice");
+const sumAddonsEl = document.getElementById("sumAddons");
+const totalLabelEl = document.getElementById("totalLabel");
+const totalValueEl = document.getElementById("totalValue");
 
-const sumPlanEl  = document.getElementById('sumPlan');
-const sumPlanPriceEl = document.getElementById('sumPlanPrice');
-const sumAddonsEl = document.getElementById('sumAddons');
-const totalLabelEl = document.getElementById('totalLabel');
-const totalValueEl = document.getElementById('totalValue');
-
-
-
-function showStep(i){
+function showStep(i) {
   state.step = i;
-  steps.forEach((s,idx)=> s.classList.toggle('active', idx===i));
-  badges.forEach((b,idx)=> b.classList.toggle('active', idx===i));
+  steps.forEach((s, idx) => s.classList.toggle("active", idx === i));
+  badges.forEach((b, idx) => b.classList.toggle("active", idx === i));
 }
 
-function money(n, cycle){
-  return `$${n}/${cycle==='yearly'?'yr':'mo'}`;
+function money(n, cycle) {
+  return `$${n}/${cycle === "yearly" ? "yr" : "mo"}`;
 }
 
-function refreshPlanPrices(){
-  const yearly = state.billing==='yearly';
-  document.querySelector('.card').classList.toggle('yearly', yearly);
-  document.querySelector('.card').classList.toggle('yearly-on', yearly);
+function refreshPlanPrices() {
+  const yearly = state.billing === "yearly";
+  document.querySelector(".card").classList.toggle("yearly", yearly);
+  document.querySelector(".card").classList.toggle("yearly-on", yearly);
 
-  document.querySelector('.bill-label.monthly').classList.toggle('active', !yearly);
-  document.querySelector('.bill-label.yearly').classList.toggle('active', yearly);
+  document
+    .querySelector(".bill-label.monthly")
+    .classList.toggle("active", !yearly);
+  document
+    .querySelector(".bill-label.yearly")
+    .classList.toggle("active", yearly);
 
-  planCards.forEach(card=>{
+  planCards.forEach((card) => {
     const price = yearly ? card.dataset.yearly : card.dataset.monthly;
-    card.querySelector('.price').textContent = money(price, state.billing);
+    card.querySelector(".price").textContent = money(price, state.billing);
   });
 
-  addonChecks.forEach(chk=>{
+  addonChecks.forEach((chk) => {
     const price = yearly ? chk.dataset.yearly : chk.dataset.monthly;
-    chk.closest('.addon').querySelector('.addon-price').textContent = `+${money(price, state.billing)}`;
+    chk.closest(".addon").querySelector(".addon-price").textContent = `+${money(
+      price,
+      state.billing
+    )}`;
   });
 }
 
-function updateSummary(){
-  if(!state.plan) return;
+function updateSummary() {
+  if (!state.plan) return;
 
-  
-  const planPrice = state.billing==='yearly' ? state.plan.yearly : state.plan.monthly;
-  sumPlanEl.textContent = `${state.plan.name} (${state.billing==='yearly'?'Yearly':'Monthly'})`;
+  const planPrice =
+    state.billing === "yearly" ? state.plan.yearly : state.plan.monthly;
+  sumPlanEl.textContent = `${state.plan.name} (${
+    state.billing === "yearly" ? "Yearly" : "Monthly"
+  })`;
   sumPlanPriceEl.textContent = money(planPrice, state.billing);
 
-  
-  sumAddonsEl.innerHTML = '';
+  sumAddonsEl.innerHTML = "";
   let total = Number(planPrice);
 
-  state.addons.forEach(a=>{
-    const p = state.billing==='yearly' ? a.yearly : a.monthly;
+  state.addons.forEach((a) => {
+    const p = state.billing === "yearly" ? a.yearly : a.monthly;
     total += Number(p);
-    const row = document.createElement('div');
-    row.className = 'row';
-    row.innerHTML = `<span>${a.name}</span><span>+${money(p, state.billing)}</span>`;
+    const row = document.createElement("div");
+    row.className = "row";
+    row.innerHTML = `<span>${a.name}</span><span>+${money(
+      p,
+      state.billing
+    )}</span>`;
     sumAddonsEl.appendChild(row);
   });
 
-  totalLabelEl.textContent = `Total (per ${state.billing==='yearly'?'year':'month'})`;
+  totalLabelEl.textContent = `Total (per ${
+    state.billing === "yearly" ? "year" : "month"
+  })`;
   totalValueEl.textContent = money(total, state.billing);
 }
 
-
-document.querySelectorAll('.btn.next').forEach(btn=>{
-  btn.addEventListener('click', ()=>{
-
-    if(state.step===0){
-      const name  = document.getElementById('name').value.trim();
-      const email = document.getElementById('email').value.trim();
-      const phone = document.getElementById('phone').value.trim();
-      if(!name || !email || !phone){ alert('Please complete your info.'); return; }
+document.querySelectorAll(".btn.next").forEach((btn) => {
+  btn.addEventListener("click", (e) => {
+    if (state.step === 0) {
+      const name = document.getElementById("name").value.trim();
+      const email = document.getElementById("email").value.trim();
+      const phone = document.getElementById("phone").value.trim();
+      const emailError = document.querySelector(".error-message");
+      const emailValid = /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email);
+      if (!name || !email || !phone) {
+        emailError.textContent = "";
+        alert("Please complete your info.");
+        return;
+      }
+      if (!emailValid) {
+        emailError.textContent = "Please enter a valid email address.";
+        emailError.style.display = "block";
+        return;
+      } else {
+        emailError.textContent = "";
+        emailError.style.display = "none";
+      }
     }
-    if(state.step===1 && !state.plan){ alert('Please select a plan.'); return; }
-    if(state.step===2){
+    if (state.step === 1 && !state.plan) {
+      alert("Please select a plan.");
+      return;
+    }
+    if (state.step === 2) {
       updateSummary();
     }
-    showStep(Math.min(state.step+1, steps.length-1));
+    showStep(Math.min(state.step + 1, steps.length - 1));
   });
 });
 
-
-document.querySelectorAll('.btn.prev').forEach(btn=>{
-  btn.addEventListener('click', ()=> showStep(Math.max(state.step-1,0)));
+document.querySelectorAll(".btn.prev").forEach((btn) => {
+  btn.addEventListener("click", () => showStep(Math.max(state.step - 1, 0)));
 });
 
-
-document.querySelector('.btn.confirm').addEventListener('click', ()=>{
+document.querySelector(".btn.confirm").addEventListener("click", () => {
   showStep(4);
 });
 
-
-billSwitch.addEventListener('change', ()=>{
-  state.billing = billSwitch.checked ? 'yearly' : 'monthly';
+billSwitch.addEventListener("change", () => {
+  state.billing = billSwitch.checked ? "yearly" : "monthly";
   refreshPlanPrices();
-  if(state.step===3) updateSummary();
+  if (state.step === 3) updateSummary();
 });
 refreshPlanPrices();
 
-
-planCards.forEach(card=>{
-  card.addEventListener('click', ()=>{
-    planCards.forEach(c=>c.classList.remove('active'));
-    card.classList.add('active');
+planCards.forEach((card) => {
+  card.addEventListener("click", () => {
+    planCards.forEach((c) => c.classList.remove("active"));
+    card.classList.add("active");
     state.plan = {
       name: card.dataset.plan,
       monthly: Number(card.dataset.monthly),
-      yearly: Number(card.dataset.yearly)
+      yearly: Number(card.dataset.yearly),
     };
   });
 });
 
-
-
-
-addonChecks.forEach(chk=>{
-  chk.addEventListener('change', ()=>{
-    const foundIdx = state.addons.findIndex(a=>a.name===chk.dataset.name);
-    if(chk.checked){
-      if(foundIdx===-1){
+addonChecks.forEach((chk) => {
+  chk.addEventListener("change", () => {
+    const foundIdx = state.addons.findIndex((a) => a.name === chk.dataset.name);
+    if (chk.checked) {
+      if (foundIdx === -1) {
         state.addons.push({
           name: chk.dataset.name,
           monthly: Number(chk.dataset.monthly),
-          yearly: Number(chk.dataset.yearly)
+          yearly: Number(chk.dataset.yearly),
         });
       }
-    }else{
-      if(foundIdx>-1) state.addons.splice(foundIdx,1);
+    } else {
+      if (foundIdx > -1) state.addons.splice(foundIdx, 1);
     }
   });
 });
 
-
-document.getElementById('changePlan').addEventListener('click', ()=>{
+document.getElementById("changePlan").addEventListener("click", () => {
   showStep(1);
 });
 
-document.getElementById("multiStepForm").addEventListener("submit", function(event) {
-  const emailInput = document.getElementById("email");
-  const emailError = document.getElementById("emailError");
+document
+  .getElementById("multiStepForm")
+  .addEventListener("submit", function (event) {
+    const emailInput = document.getElementById("email");
+    const emailError = document.getElementById("emailError");
 
-  if (!emailInput.validity.valid) {
-    event.preventDefault(); 
-    emailError.textContent = "Please enter a valid email address with @";
-    emailError.style.display = "block";
-  } else {
-    emailError.style.display = "none";
-  }
-});
-
-
-
+    if (!emailInput.validity.valid) {
+      event.preventDefault();
+      emailError.textContent = "Please enter a valid email address with @";
+      emailError.style.display = "block";
+    } else {
+      emailError.style.display = "none";
+    }
+  });
