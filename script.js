@@ -87,7 +87,10 @@ function updateSummary() {
 }
 
 document.querySelectorAll(".btn.next").forEach((btn) => {
-  btn.addEventListener("click", (e) => {
+  btn.addEventListener("click", function (e) {
+    if (btn.type === "submit") {
+      e.preventDefault();
+    }
     if (state.step === 0) {
       const name = document.getElementById("name").value.trim();
       const email = document.getElementById("email").value.trim();
@@ -167,17 +170,4 @@ document.getElementById("changePlan").addEventListener("click", () => {
   showStep(1);
 });
 
-document
-  .getElementById("multiStepForm")
-  .addEventListener("submit", function (event) {
-    const emailInput = document.getElementById("email");
-    const emailError = document.getElementById("emailError");
-
-    if (!emailInput.validity.valid) {
-      event.preventDefault();
-      emailError.textContent = "Please enter a valid email address with @";
-      emailError.style.display = "block";
-    } else {
-      emailError.style.display = "none";
-    }
-  });
+// ...existing code...
