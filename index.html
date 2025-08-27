@@ -1,48 +1,73 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Multi-step form</title>
-  <link rel="stylesheet" href="style.css"/>
-</head>
-<body>
-  <div class="shell">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Multi-step form</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="shell">
+      <aside class="sidebar">
+        <div class="step-badge active" data-step="0">
+          <span>1</span>
+          <div>
+            <p>STEP 1</p>
+            <strong>YOUR INFO</strong>
+          </div>
+        </div>
+        <div class="step-badge" data-step="1">
+          <span>2</span>
+          <div>
+            <p>STEP 2</p>
+            <strong>SELECT PLAN</strong>
+          </div>
+        </div>
+        <div class="step-badge" data-step="2">
+          <span>3</span>
+          <div>
+            <p>STEP 3</p>
+            <strong>ADD-ONS</strong>
+          </div>
+        </div>
+        <div class="step-badge" data-step="3">
+          <span>4</span>
+          <div>
+            <p>STEP 4</p>
+            <strong>SUMMARY</strong>
+          </div>
+        </div>
+        <div class="art"></div>
+      </aside>
 
-
-    <aside class="sidebar">
-      <div class="step-badge active" data-step="0"><span>1</span><div><p>STEP 1</p><strong>YOUR INFO</strong></div></div>
-      <div class="step-badge" data-step="1"><span>2</span><div><p>STEP 2</p><strong>SELECT PLAN</strong></div></div>
-      <div class="step-badge" data-step="2"><span>3</span><div><p>STEP 3</p><strong>ADD-ONS</strong></div></div>
-      <div class="step-badge" data-step="3"><span>4</span><div><p>STEP 4</p><strong>SUMMARY</strong></div></div>
-      <div class="art"></div>
-    </aside>
-
-    
-    <main class="card">
-
-
-
-      <!-- STEP 1 -->
-      <section class="step active" id="step1">
-        <h1>Personal info</h1>
-        <p class="sub">Please provide your name, email address, and phone number.</p>
+      <main class="card">
+        <!-- STEP 1 -->
+        <section class="step active" id="step1">
+          <h1>Personal info</h1>
+          <p class="sub">
+            Please provide your name, email address, and phone number.
+          </p>
 
         <label for="name">Name</label>
         <input id="name" type="text" placeholder="e.g. Stephen King" required>
-      
-       <label for="email">Email Address</label>
-        <input type="email" id="email" placeholder="e.g. stephenking@lorem.com" required>
-      <span id="emailError" class="error-message" style="display:none;color:red;font-size:14px;">
-  Please enter a valid email address (must include "@").
-</span>
+        <label for="email">Email Address</label>
+        <input 
+  id="email" 
+  <input type="email"
+  placeholder="e.g. stephenking@lorem.com" 
+  required 
+  pattern="^[^\s@]+@[^\s@]+\.[^\s@]+$" 
+>
+<span id="emailError" class="error-message"></span>
 
+
+
+
+        
+<span id="emailError" class="error-message"></span>
 
         <label for="phone">Phone Number</label>
-        <input id="phone" type="tel" placeholder="e.g. +1 234 567 890"  pattern ="\d{11}" maxlength="11" required>
-<small id="phoneError" style="color:red; display:none;">
-  Phone number must be 11 digits.
-</small>
+        <input id="phone" type="tel" placeholder="e.g. +1 234 567 890" required>
 
         <div class="nav">
           <button class="btn next">Next Step</button>
@@ -52,141 +77,174 @@
 
 
 
-      <!-- STEP 2 -->
-      <section class="step" id="step2">
-        <h1>Select your plan</h1>
-        <p class="sub">You have the option of monthly or yearly billing.</p>
 
-        <div class="plans">
-          <div class="plan-card" data-plan="Arcade" data-monthly="9" data-yearly="90">
-            <div class="icon bubble orange">🕹️</div>
-            <div class="meta">
-              <div class="title">Arcade</div>
-              <div class="price">$9/mo</div>
-              <div class="promo">2 months free</div>
+
+
+      
+
+
+
+
+        <!-- STEP 2 -->
+        <section class="step" id="step2">
+          <h1>Select your plan</h1>
+          <p class="sub">You have the option of monthly or yearly billing.</p>
+
+          <div class="plans">
+            <div
+              class="plan-card"
+              data-plan="Arcade"
+              data-monthly="9"
+              data-yearly="90"
+            >
+              <div class="icon bubble orange">🕹️</div>
+              <div class="meta">
+                <div class="title">Arcade</div>
+                <div class="price">$9/mo</div>
+                <div class="promo">2 months free</div>
+              </div>
+            </div>
+
+            <div
+              class="plan-card"
+              data-plan="Advanced"
+              data-monthly="12"
+              data-yearly="120"
+            >
+              <div class="icon bubble pink">🎛️</div>
+              <div class="meta">
+                <div class="title">Advanced</div>
+                <div class="price">$12/mo</div>
+                <div class="promo">2 months free</div>
+              </div>
+            </div>
+
+            <div
+              class="plan-card"
+              data-plan="Pro"
+              data-monthly="15"
+              data-yearly="150"
+            >
+              <div class="icon bubble purple">🎮</div>
+              <div class="meta">
+                <div class="title">Pro</div>
+                <div class="price">$15/mo</div>
+                <div class="promo">2 months free</div>
+              </div>
             </div>
           </div>
 
-          <div class="plan-card" data-plan="Advanced" data-monthly="12" data-yearly="120">
-            <div class="icon bubble pink">🎛️</div>
-            <div class="meta">
-              <div class="title">Advanced</div>
-              <div class="price">$12/mo</div>
-              <div class="promo">2 months free</div>
-            </div>
+          <div class="billing">
+            <span class="bill-label monthly active">Monthly</span>
+            <label class="switch">
+              <input type="checkbox" id="billSwitch" />
+              <span class="slider"></span>
+            </label>
+            <span class="bill-label yearly">Yearly</span>
           </div>
 
-          <div class="plan-card" data-plan="Pro" data-monthly="15" data-yearly="150">
-            <div class="icon bubble purple">🎮</div>
-            <div class="meta">
-              <div class="title">Pro</div>
-              <div class="price">$15/mo</div>
-              <div class="promo">2 months free</div>
-            </div>
-          </div>
+        <div class="nav">
+          <button class="btn ghost prev">Go Back</button>
+          <button class="btn next">Next Step</button>
         </div>
+      </section>
 
-        <div class="billing">
-          <span class="bill-label monthly active">Monthly</span>
-          <label class="switch">
-            <input type="checkbox" id="billSwitch">
-            <span class="slider"></span>
+
+
+
+
+
+
+        <!-- STEP 3 -->
+        <section class="step" id="step3">
+          <h1>Pick add-ons</h1>
+          <p class="sub">Add-ons help enhance your gaming experience.</p>
+
+          <label class="addon">
+            <input
+              class="addon-check"
+              type="checkbox"
+              data-name="Online service"
+              data-monthly="1"
+              data-yearly="10"
+            />
+            <div class="addon-body">
+              <div class="texts">
+                <div class="name">Online service</div>
+                <div class="desc">Access to multiplayer games</div>
+              </div>
+              <div class="addon-price">+$1/mo</div>
+            </div>
           </label>
-          <span class="bill-label yearly">Yearly</span>
-        </div>
 
-        <div class="nav">
-          <button class="btn ghost prev">Go Back</button>
-          <button class="btn next">Next Step</button>
-        </div>
-      </section>
-
-
-
-
-
-      <!-- STEP 3 -->
-      <section class="step" id="step3">
-        <h1>Pick add-ons</h1>
-        <p class="sub">Add-ons help enhance your gaming experience.</p>
-
-        <label class="addon">
-          <input class="addon-check" type="checkbox" data-name="Online service" data-monthly="1" data-yearly="10">
-          <div class="addon-body">
-            <div class="texts">
-              <div class="name">Online service</div>
-              <div class="desc">Access to multiplayer games</div>
+          <label class="addon">
+            <input
+              class="addon-check"
+              type="checkbox"
+              data-name="Larger storage"
+              data-monthly="2"
+              data-yearly="20"
+            />
+            <div class="addon-body">
+              <div class="texts">
+                <div class="name">Larger storage</div>
+                <div class="desc">Extra 1TB of cloud save</div>
+              </div>
+              <div class="addon-price">+$2/mo</div>
             </div>
-            <div class="addon-price">+$1/mo</div>
-          </div>
-        </label>
+          </label>
 
-        <label class="addon">
-          <input class="addon-check" type="checkbox" data-name="Larger storage" data-monthly="2" data-yearly="20">
-          <div class="addon-body">
-            <div class="texts">
-              <div class="name">Larger storage</div>
-              <div class="desc">Extra 1TB of cloud save</div>
+          <label class="addon">
+            <input
+              class="addon-check"
+              type="checkbox"
+              data-name="Customizable profile"
+              data-monthly="2"
+              data-yearly="20"
+            />
+            <div class="addon-body">
+              <div class="texts">
+                <div class="name">Customizable profile</div>
+                <div class="desc">Custom theme on your profile</div>
+              </div>
+              <div class="addon-price">+$2/mo</div>
             </div>
-            <div class="addon-price">+$2/mo</div>
-          </div>
-        </label>
+          </label>
 
-        <label class="addon">
-          <input class="addon-check" type="checkbox" data-name="Customizable profile" data-monthly="2" data-yearly="20">
-          <div class="addon-body">
-            <div class="texts">
-              <div class="name">Customizable profile</div>
-              <div class="desc">Custom theme on your profile</div>
+          <div class="nav">
+            <button class="btn ghost prev">Go Back</button>
+            <button class="btn next">Next Step</button>
+          </div>
+        </section>
+
+        <!-- STEP 4 -->
+        <section class="step" id="step4">
+          <h1>Finishing up</h1>
+          <p class="sub">Double-check everything looks OK before confirming.</p>
+
+          <div class="summary">
+            <div class="sum-top">
+              <div>
+                <div class="sum-plan" id="sumPlan">—</div>
+                <button class="link" id="changePlan">Change</button>
+              </div>
+              <div class="sum-plan-price" id="sumPlanPrice">$0</div>
             </div>
-            <div class="addon-price">+$2/mo</div>
+            <div class="sum-addons" id="sumAddons"></div>
           </div>
-        </label>
 
-        <div class="nav">
-          <button class="btn ghost prev">Go Back</button>
-          <button class="btn next">Next Step</button>
-        </div>
-      </section>
-
-
-
-
-
-
-      
-      <!-- STEP 4 -->
-      <section class="step" id="step4">
-        <h1>Finishing up</h1>
-        <p class="sub">Double-check everything looks OK before confirming.</p>
-
-        <div class="summary">
-          <div class="sum-top">
-            <div>
-              <div class="sum-plan" id="sumPlan">—</div>
-              <button class="link" id="changePlan">Change</button>
-            </div>
-            <div class="sum-plan-price" id="sumPlanPrice">$0</div>
+          <div class="total-row">
+            <span id="totalLabel">Total (per month)</span>
+            <strong id="totalValue">$0/mo</strong>
           </div>
-          <div class="sum-addons" id="sumAddons"></div>
-        </div>
 
-        <div class="total-row">
-          <span id="totalLabel">Total (per month)</span>
-          <strong id="totalValue">$0/mo</strong>
-        </div>
+          <div class="nav">
+            <button class="btn ghost prev">Go Back</button>
+            <button class="btn confirm">Confirm</button>
+          </div>
+        </section>
 
-        <div class="nav">
-          <button class="btn ghost prev">Go Back</button>
-          <button class="btn confirm">Confirm</button>
-        </div>
-      </section>
-
-      
-
-
-
-      
+      <!-- Thank you  -->
       <section class="step" id="thankyou">
         <h1>Thank you!</h1>
         <p class="sub">Thanks for confirming your subscription. If you ever need support, email us at support@loremgaming.com.</p>
@@ -195,6 +253,6 @@
     </main>
   </div>
 
-  <script src="script.js"></script>
-</body>
+    <script src="script.js"></script>
+  </body>
 </html>
