@@ -135,4 +135,12 @@ input:invalid {
   border: 2px solid hsl(354, 84%, 57%);
 }
 
-
+.error-message {
+  color: hsl(354, 84%, 57%); 
+  font-size: 14px;
+  margin-top: 4px;
+  display: none;
+}
+input:invalid {
+  border: 2px solid hsl(354, 84%, 57%);
+}

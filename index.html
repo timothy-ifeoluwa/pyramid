@@ -30,37 +30,24 @@
 
         <label for="name">Name</label>
         <input id="name" type="text" placeholder="e.g. Stephen King" required>
-        <label for="email">Email Address</label>
-        <input 
-  id="email" 
-  <input type="email"
-  placeholder="e.g. stephenking@lorem.com" 
-  required 
-  pattern="^[^\s@]+@[^\s@]+\.[^\s@]+$" 
->
-<span id="emailError" class="error-message"></span>
+      
+       <label for="email">Email Address</label>
+        <input type="email" id="email" placeholder="e.g. stephenking@lorem.com" required>
+      <span id="emailError" class="error-message" style="display:none;color:red;font-size:14px;">
+  Please enter a valid email address (must include "@").
+</span>
 
-
-
-
-        
-<span id="emailError" class="error-message"></span>
 
         <label for="phone">Phone Number</label>
-        <input id="phone" type="tel" placeholder="e.g. +1 234 567 890" required>
+        <input id="phone" type="tel" placeholder="e.g. +1 234 567 890"  pattern ="\d{11}" maxlength="11" required>
+<small id="phoneError" style="color:red; display:none;">
+  Phone number must be 11 digits.
+</small>
 
         <div class="nav">
           <button class="btn next">Next Step</button>
         </div>
       </section>
-
-
-
-
-
-
-
-      
 
 
 
@@ -113,8 +100,6 @@
           <button class="btn next">Next Step</button>
         </div>
       </section>
-
-
 
 
 
@@ -197,7 +182,11 @@
         </div>
       </section>
 
-      <!-- Thank you  -->
+      
+
+
+
+      
       <section class="step" id="thankyou">
         <h1>Thank you!</h1>
         <p class="sub">Thanks for confirming your subscription. If you ever need support, email us at support@loremgaming.com.</p>
